@@ -9,9 +9,9 @@ Release:	0.2
 License:	LGPL
 Vendor:		Brian Paul <brian_paul@mesa3d.org>
 Group:		X11/Libraries
-Source0:	http://dl.sf.net/mesa3d/MesaLib-%{mesaversion}.tar.bz2
+Source0:	http://dl.sourceforge.net/mesa3d/MesaLib-%{mesaversion}.tar.bz2
 # Source0-md5:	dcd5a6aa77b3bdb400c8179419473e58
-Source1:	http://dl.sf.net/mesa3d/MesaDemos-%{mesaversion}.tar.bz2
+Source1:	http://dl.sourceforge.net/mesa3d/MesaDemos-%{mesaversion}.tar.bz2
 # Source1-md5:	621bd95ed9f93467f4dfa615e2f27c16
 Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
 # Source2-md5:	654ae59e0603d71c18a88737e9f954c6
