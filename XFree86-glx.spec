@@ -18,9 +18,9 @@ Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
 URL:		http://www.mesa3d.org/
 BuildRequires:	binutils >= 2.9.1.0.19a
 BuildRequires:	tcl
+Provides:	OpenGL
 Conflicts:	XFree86 =< 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	OpenGL
 Obsoletes:	Mesa
 Obsoletes:	XFree86-OpenGL-core
 Obsoletes:	XFree86-OpenGL-libs
@@ -205,10 +205,12 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_includedir}/GL,%{_sysconfdir},/usr/bin}
-install -d $RPM_BUILD_ROOT%{_libdir}/modules
+install -d $RPM_BUILD_ROOT{%{_includedir}/GL,%{_sysconfdir},/usr/bin} \
+	$RPM_BUILD_ROOT%{_libdir}/modules
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
 install include/GL/svgamesa.h $RPM_BUILD_ROOT%{_includedir}/GL
 install glx/servGL/libglx.so $RPM_BUILD_ROOT%{_libdir}/modules
 
@@ -222,11 +224,13 @@ EOF
 
 ## glx
 cd glx
-%{__make} DESTDIR=$RPM_BUILD_ROOT sysconfdir=%{_sysconfdir} install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	sysconfdir=%{_sysconfdir}
 cd ..
 %endif # glx
 
-cd $RPM_BUILD_ROOT/%{_prefix}/lib/
+cd $RPM_BUILD_ROOT%{_prefix}/lib/
 ln -sf libGL.so.1 libGL.so
 ln -sf libGLU.so.1 libGLU.so
 ln -sf libGLU.so.1 libGLU.so.3
