@@ -16,14 +16,13 @@ Source1:	http://dl.sourceforge.net/mesa3d/MesaDemos-%{mesaversion}.tar.bz2
 Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
 # Source2-md5:	654ae59e0603d71c18a88737e9f954c6
 URL:		http://www.mesa3d.org/
-BuildRequires:	binutils
 BuildRequires:	tcl
 Provides:	OpenGL
 Conflicts:	XFree86 =< 4.1.0
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	Mesa
 Obsoletes:	XFree86-OpenGL-core
 Obsoletes:	XFree86-OpenGL-libs
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_sysconfdir	/etc/X11
@@ -81,7 +80,7 @@ Wiêcej informacji na stronie http://utah-glx.sourceforge.net/.
 Summary:	Development files for Mesa (OpenGL compatible 3D lib)
 Summary(pl):	Pliki nag³ówkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Provides:	OpenGL-devel
 Obsoletes:	Mesa-devel
 Obsoletes:	XFree86-OpenGL-devel
@@ -224,7 +223,7 @@ echo 'Skipping utah_glx'
 %else
 cat > $RPM_BUILD_ROOT/usr/bin/glx <<EOF
 #!/bin/sh
-LD_PRELOAD=%{_prefix}/lib/libGL.so.1.0 "\$@"
+LD_PRELOAD=%{_libdir}/libGL.so.1.0 "\$@"
 EOF
 
 ## glx
@@ -235,7 +234,7 @@ cd glx
 cd ..
 %endif # glx
 
-cd $RPM_BUILD_ROOT%{_prefix}/lib
+cd $RPM_BUILD_ROOT%{_libdir}
 ln -sf libGL.so.1 libGL.so
 ln -sf libGLU.so.1 libGLU.so
 ln -sf libGLU.so.1 libGLU.so.3
@@ -261,12 +260,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/*.so.*
 %config %{_sysconfdir}/mesa.conf
 %ifarch %{ix86}
-%{_prefix}/lib/modules/extensions/*.so
+%{_libdir}/modules/extensions/*.so
 %config %{_sysconfdir}/glx.conf
 %endif
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %dir %{_includedir}/GL
 %{_includedir}/GL/gl*.h
 %{_includedir}/GL/o*.h
@@ -274,5 +275,3 @@ rm -rf $RPM_BUILD_ROOT
 %ifarch %{ix86}
 %{_includedir}/GL/svgamesa.h
 %endif
-%{_prefix}/lib/lib*.so
-%{_prefix}/lib/lib*.la
