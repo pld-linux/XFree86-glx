@@ -13,7 +13,7 @@ Source0:	ftp://ftp.mesa3d.org/pub/sourceforge/mesa3d/MesaLib-%{mesaversion}.tar.
 Source1:	ftp://ftp.mesa3d.org/pub/sourceforge/mesa3d/MesaDemos-%{mesaversion}.tar.bz2
 Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
 URL:		http://www.mesa3d.org/
-BuildPreReq:	binutils >= 2.9.1.0.19a
+BuildRequires:	binutils >= 2.9.1.0.19a
 BuildRequires:	tcl
 Conflicts:	XFree86 =< 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
