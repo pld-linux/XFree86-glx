@@ -17,6 +17,7 @@ BuildPreReq:	binutils >= 2.9.1.0.19a
 BuildRequires:	tcl
 Conflicts:	XFree86 =< 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:	OpenGL
 Obsoletes:	Mesa
 Obsoletes:	XFree86-OpenGL-core
 Obsoletes:	XFree86-OpenGL-libs
