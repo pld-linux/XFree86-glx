@@ -77,7 +77,7 @@ Ten pakiet bazuje na Mesie %{mesaver} oraz utah-glx-%{glxver}.
 
 Wiêcej informacji na stronie http://utah-glx.sourceforge.net/.
 
-%package	devel
+%package devel
 Summary:	Development files for Mesa (OpenGL compatible 3D lib)
 Summary(pl):	Pliki nag³ówkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
 Group:		X11/Development/Libraries
@@ -98,52 +98,55 @@ nag³ówkowe potrzebne do kompilowania programów u¿ywaj±cych Mesy.
 %setup -q -n Mesa-%{mesaversion} -b1 -a2
 [ -d glx-xf4 ] && ln -s glx-xf4 glx;
 
-perl -p -i -e "s/-O3/%{rpmcflags}/" Make-config
+perl -pi -e "s/-O3/%{rpmcflags}/" Make-config
 
 %build
 RPM_OPT_FLAGS="%{rpmcflags}"; export RPM_OPT_FLAGS
 %ifarch i386 i486
 CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
-./configure	--prefix=%{_prefix} \
-		--sysconfdir=%{_sysconfdir} \
-		--disable-mmx \
-		--disable-3dnow \
-		--without-ggi \
-		--enable-mga=no \
-		--enable-mach64=no \
-		--enable-tnt=yes \
-		--enable-i810=no \
-		--enable-s3virge=no \
-		--enable-s3savage=no \
-		--enable-sis6326=no
+./configure \
+	--prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir} \
+	--disable-mmx \
+	--disable-3dnow \
+	--without-ggi \
+	--enable-mga=no \
+	--enable-mach64=no \
+	--enable-tnt=yes \
+	--enable-i810=no \
+	--enable-s3virge=no \
+	--enable-s3savage=no \
+	--enable-sis6326=no
 
 %endif
 %ifarch i586 i686 k6 athlon
 CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
-./configure	--prefix=%{_prefix} \
-		--sysconfdir=%{_sysconfdir} \
-		--with-glide=/usr \
-		--without-ggi \
-		--enable-mga=no \
-		--enable-mach64=no \
-		--enable-tnt=yes \
-		--enable-i810=no \
-		--enable-s3virge=no \
-		--enable-s3savage=no \
-		--enable-sis6326=no
+./configure \
+	--prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir} \
+	--with-glide=/usr \
+	--without-ggi \
+	--enable-mga=no \
+	--enable-mach64=no \
+	--enable-tnt=yes \
+	--enable-i810=no \
+	--enable-s3virge=no \
+	--enable-s3savage=no \
+	--enable-sis6326=no
 %endif
 %ifnarch %{ix86}
-./configure	--prefix=%{_prefix} \
-		--sysconfdir=%{_sysconfdir} \
-		--disable-3dnow \
-		--without-ggi \
-		--enable-mga=no \
-		--enable-mach64=no \
-		--enable-tnt=yes \
-		--enable-i810=no \
-		--enable-s3virge=no \
-		--enable-s3savage=no \
-		--enable-sis6326=no
+./configure \
+	--prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir} \
+	--disable-3dnow \
+	--without-ggi \
+	--enable-mga=no \
+	--enable-mach64=no \
+	--enable-tnt=yes \
+	--enable-i810=no \
+	--enable-s3virge=no \
+	--enable-s3savage=no \
+	--enable-sis6326=no
 %endif
 
 %{__make}
@@ -153,28 +156,29 @@ CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
 	echo 'utah_glx skipped for alpha, powerpc and sparcs'
 %else
 cd glx
-cp -fv ../config.sub ./
+cp -fv ../config.sub .
 
 CFLAGS="%{rpmcflags}" \
-	./autogen.sh	--with-chipset=both \
-			--with-mesa=../ \
-			--enable-extra \
-			--disable-mtrr \
-			--disable-agp \
-			--disable-glut \
-			--disable-GLU \
-			--prefix=%{_prefix} \
-			--sysconfdir=%{_sysconfdir} \
-			--without-x86-asm \
-			--without-mmx-asm \
-			--without-3dnow-asm \
-			--enable-mga=no \
-			--enable-mach64=no \
-			--enable-tnt=yes \
-			--enable-i810=no \
-			--enable-s3virge=no \
-			--enable-s3savage=no \
-			--enable-sis6326=no
+./autogen.sh \
+	--with-chipset=both \
+	--with-mesa=../ \
+	--enable-extra \
+	--disable-mtrr \
+	--disable-agp \
+	--disable-glut \
+	--disable-GLU \
+	--prefix=%{_prefix} \
+	--sysconfdir=%{_sysconfdir} \
+	--without-x86-asm \
+	--without-mmx-asm \
+	--without-3dnow-asm \
+	--enable-mga=no \
+	--enable-mach64=no \
+	--enable-tnt=yes \
+	--enable-i810=no \
+	--enable-s3virge=no \
+	--enable-s3savage=no \
+	--enable-sis6326=no
 
 # Arg docs sux ((Dadou) "are not OK", it's better ;)
 cd docs
@@ -193,10 +197,11 @@ ac_cv_prog_have_ps2pdf=${ac_cv_prog_have_ps2pdf=no}
 ac_cv_prog_make_make_set=${ac_cv_prog_make_make_set=yes}
 EOF
 
-./configure	--enable-text \
-		--enable-html \
-		--enable-ps \
-		--enable-pdf
+./configure \
+	--enable-text \
+	--enable-html \
+	--enable-ps \
+	--enable-pdf
 cd ..
 
 %{__make}
@@ -230,7 +235,7 @@ cd glx
 cd ..
 %endif # glx
 
-cd $RPM_BUILD_ROOT%{_prefix}/lib/
+cd $RPM_BUILD_ROOT%{_prefix}/lib
 ln -sf libGL.so.1 libGL.so
 ln -sf libGLU.so.1 libGLU.so
 ln -sf libGLU.so.1 libGLU.so.3
@@ -251,7 +256,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/{COPYRIGHT,README*,COPYING,DEVINFO,CONFORM,VERSIONS} glx/docs/README.*
+%doc docs/{COPYRIGHT,README*,DEVINFO,CONFORM,VERSIONS} glx/docs/README.*
 %attr(755,root,root) /usr/bin/glx
 %{_libdir}/*.so.*
 %config %{_sysconfdir}/mesa.conf
