@@ -23,10 +23,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Source:		ftp://ftp.mesa3d.org/pub/mesa/MesaLib-%{mesaversion}.tar.bz2
 Source1:	ftp://ftp.mesa3d.org/pub/mesa/MesaDemos-%{mesaversion}.tar.bz2
 Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
-Obsoletes:	Mesa XFree86-OpenGL-core XFree86-OpenGL-libs
+Obsoletes:	Mesa 
+Obsoletes:	XFree86-OpenGL-core 
+Obsoletes:	XFree86-OpenGL-libs
 
 BuildPreReq:	binutils >= 2.9.1.0.19a
-Conflicts:	XFree86 >= 3.3.6
+Conflicts:	XFree86 =< 4.1.0
 
 %description
 This is an implementation of the Mesa 3D library and GLX with support
