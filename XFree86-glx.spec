@@ -151,7 +151,7 @@ CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
 %{__make}
 
 %ifarch alpha sparc sparc64 ppc # Skip utah_glx for alpha - (fg) also skip it for
-                                # sparc - (jb) also added skip for ppc
+				# sparc - (jb) also added skip for ppc
 	echo 'utah_glx skipped for alpha, powerpc and sparcs'
 %else
 cd glx
