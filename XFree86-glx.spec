@@ -221,7 +221,8 @@ ln -sf libGLU.so.1 libMesaGLU.so.1
 %{_libdir}/*.so.*
 %config %{_sysconfdir}/mesa.conf
 %ifarch i386 i486 i586 i686 k6 k7
-# %{_prefix}/lib/modules/*
+%{_prefix}/lib/modules/extensions/*.so
+#%{_prefix}/lib/modules/extensions/*.so
 %config %{_sysconfdir}/glx.conf
 %endif
 
