@@ -56,6 +56,9 @@ Summary:	Development files for Mesa (OpenGL compatible 3D lib)
 Summary(pl):	Pliki i biblioteki nag³ówkowe dla Mesy (biblioteka 3D OpenGL)
 Group:		X11/Development/Libraries
 Requires:	%{name}
+Provides:	OpenGL-devel
+Obsoletes:	Mesa-devel
+Obsoletes:	XFree86-OpenGL-devel
 
 %description devel
 Mesa is an OpenGL 1.2 compatible 3D graphics library. Headers needed
