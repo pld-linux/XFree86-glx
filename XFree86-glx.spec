@@ -16,7 +16,7 @@ Source1:	http://dl.sourceforge.net/mesa3d/MesaDemos-%{mesaversion}.tar.bz2
 Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
 # Source2-md5:	654ae59e0603d71c18a88737e9f954c6
 URL:		http://www.mesa3d.org/
-BuildRequires:	binutils >= 2.9.1.0.19a
+BuildRequires:	binutils
 BuildRequires:	tcl
 Provides:	OpenGL
 Conflicts:	XFree86 =< 4.1.0
