@@ -2,7 +2,7 @@
 %define glx_ver	latest
 
 Summary:	OpenGL 1.2 compatible 3D graphics library
-Summary(pl):	Bilioteka grfiki 3D kompatybilna z OpenGL 1.2
+Summary(pl):	Biblioteka grafiki 3D kompatybilna z OpenGL 1.2
 Name:		XFree86-glx
 Version:	4.2.0
 Release:	0.2
@@ -48,33 +48,57 @@ who want a licensed implementation of OpenGL should contact a licensed
 vendor. However, Mesa is very similar to OpenGL, and you might find
 Mesa to be a valid alternative to OpenGL.
 
-This package is based on Mesa %{mesaver} and utah glx-%{glxver}.
+This package is based on Mesa %{mesaver} and utah-glx-%{glxver}.
 
 please see http://utah-glx.sourceforge.net/ for more information.
 
+%description -l pl
+To jest implementacja biblioteki Mesa 3D oraz GLX z obs³ug± sprzêtowej
+akceleracji. GLX zosta³ stworzony przez SGI jako rozszerzenie systemu
+X Window w celu integracji funkcji renderuj±cych OpenGL. Pozwala to
+bibliotece Mesa 3D na wykonywanie funkcji renderujacych 3D wewn±trz
+procesu X serwera zamiast po stronie X klienta. Daje to potencjalne
+zyski wydajno¶ci, poniewa¿ wyrenderowany obraz nie musi byæ przesy³any
+z programu X klienta do X serwera (przesy³ane s± tylko polecenia
+potrzebne do renderowania). Daje to tak¿e mo¿liwo¶æ u¿ycia sprzêtowej
+akceleracji 3D. Ten pakiet zawiera sterowniki wykorzystuj±ce
+akceleracjê dla kart graficznych opartych na uk³adach z serii NVIDIA
+Riva i ATI Rage Pro.
+
+Biblioteka graficzna Mesa 3D jest potê¿nym i ogólnym zestawem narzêdzi
+do tworzenia grafiki komputerowej przy wsparciu sprzêtu. Mesa u¿ywa
+sk³adni poleceñ i maszyny stanów OpenGL za zgod± Silicon Graphics,
+Inc. Nie jest to jednak licencjonowana implementacja OpenGL.
+
+Ten pakiet bazuje na Mesie %{mesaver} oraz utah-glx-%{glxver}.
+
+Wiêcej informacji na stronie http://utah-glx.sourceforge.net/.
+
 %package	devel
 Summary:	Development files for Mesa (OpenGL compatible 3D lib)
-Summary(pl):	Pliki i biblioteki nag³ówkowe dla Mesy (biblioteka 3D OpenGL)
+Summary(pl):	Pliki nag³ówkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
 Group:		X11/Development/Libraries
-Requires:	%{name}
+Requires:	%{name} = %{version}
 Provides:	OpenGL-devel
 Obsoletes:	Mesa-devel
 Obsoletes:	XFree86-OpenGL-devel
 
 %description devel
-Mesa is an OpenGL 1.2 compatible 3D graphics library. Headers needed
-to compile Mesa programs.
+Mesa is an OpenGL 1.2 compatible 3D graphics library. This package
+contains the header files needed to compile Mesa programs.
+
+%description devel -l pl
+Mesa jest bibliotek± 3D zgodn± z OpenGL 1.2. Ten pakiet zawiera pliki
+nag³ówkowe potrzebne do kompilowania programów u¿ywaj±cych Mesy.
 
 %prep
 %setup -q -n Mesa-%{mesaversion} -b1 -a2
 [ -d glx-xf4 ] && ln -s glx-xf4 glx;
 
-RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS| sed 's/-m486 *//g'`; export RPM_OPT_FLAGS;
-
-perl -p -i -e "s/-O3/$RPM_OPT_FLAGS/" Make-config
+perl -p -i -e "s/-O3/%{rpmcflags}/" Make-config
 
 %build
-RPM_OPT_FLAGS=`echo $RPM_OPT_FLAGS| sed 's/-m486 *//g'`; export RPM_OPT_FLAGS;
+RPM_OPT_FLAGS="%{rpmcflags}"; export RPM_OPT_FLAGS
 %ifarch i386 i486
 CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
 ./configure	--prefix=%{_prefix} \
@@ -91,8 +115,8 @@ CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
 		--enable-sis6326=no
 
 %endif
-%ifarch i586 i686 k6 k7
-CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" \
+%ifarch i586 i686 k6 athlon
+CFLAGS="%{rpmcflags}" CXXFLAGS="%{rpmcflags}" \
 ./configure	--prefix=%{_prefix} \
 		--sysconfdir=%{_sysconfdir} \
 		--with-glide=/usr \
@@ -105,7 +129,7 @@ CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" \
 		--enable-s3savage=no \
 		--enable-sis6326=no
 %endif
-%ifnarch i386 i486 i586 i686 k6 k7
+%ifnarch %{ix86}
 ./configure	--prefix=%{_prefix} \
 		--sysconfdir=%{_sysconfdir} \
 		--disable-3dnow \
@@ -128,7 +152,7 @@ CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" \
 cd glx
 cp -fv ../config.sub ./
 
-CFLAGS="$RPM_OPT_FLAGS" \
+CFLAGS="%{rpmcflags}" \
 	./autogen.sh	--with-chipset=both \
 			--with-mesa=../ \
 			--enable-extra \
@@ -182,8 +206,8 @@ install -d $RPM_BUILD_ROOT{%{_includedir}/GL,%{_sysconfdir},/usr/bin}
 install -d $RPM_BUILD_ROOT%{_libdir}/modules
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
-cp include/GL/svgamesa.h $RPM_BUILD_ROOT%{_includedir}/GL/
-cp glx/servGL/libglx.so $RPM_BUILD_ROOT%{_libdir}/modules/
+install include/GL/svgamesa.h $RPM_BUILD_ROOT%{_includedir}/GL
+install glx/servGL/libglx.so $RPM_BUILD_ROOT%{_libdir}/modules
 
 %ifarch alpha sparc sparc64 ppc
 echo 'Skipping utah_glx'
@@ -213,7 +237,7 @@ ln -sf libGLU.so libMesaGLU.so
 ln -sf libGLU.so.1 libMesaGLU.so.1
 
 %clean
-[ -d $RPM_BUILD_ROOT ] && rm -rf $RPM_BUILD_ROOT;
+rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
@@ -224,9 +248,8 @@ ln -sf libGLU.so.1 libMesaGLU.so.1
 %attr(755,root,root) /usr/bin/glx
 %{_libdir}/*.so.*
 %config %{_sysconfdir}/mesa.conf
-%ifarch i386 i486 i586 i686 k6 k7
+%ifarch %{ix86}
 %{_prefix}/lib/modules/extensions/*.so
-#%{_prefix}/lib/modules/extensions/*.so
 %config %{_sysconfdir}/glx.conf
 %endif
 
@@ -236,7 +259,7 @@ ln -sf libGLU.so.1 libMesaGLU.so.1
 %{_includedir}/GL/gl*.h
 %{_includedir}/GL/o*.h
 %{_includedir}/GL/x*.h
-%ifarch i386 i486 i586 i686 k6 k7
+%ifarch %{ix86}
 %{_includedir}/GL/svgamesa.h
 %endif
 %{_prefix}/lib/lib*.so
