@@ -14,6 +14,7 @@ Source1:	ftp://ftp.mesa3d.org/pub/sourceforge/mesa3d/MesaDemos-%{mesaversion}.ta
 Source2:	http://snow.ashlu.bc.ca/glx/snapshots/utah-glx-src-%{glx_ver}.tar.gz
 URL:		http://www.mesa3d.org/
 BuildPreReq:	binutils >= 2.9.1.0.19a
+BuildRequires:	tcl
 Conflicts:	XFree86 =< 4.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	Mesa
