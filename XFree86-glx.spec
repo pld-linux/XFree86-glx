@@ -2,7 +2,7 @@
 %define glx_ver	latest
 
 Summary:	OpenGL 1.2 compatible 3D graphics library
-Summary(pl.UTF-8):   Biblioteka grafiki 3D kompatybilna z OpenGL 1.2
+Summary(pl.UTF-8):	Biblioteka grafiki 3D kompatybilna z OpenGL 1.2
 Name:		XFree86-glx
 Version:	4.2.0
 Release:	0.2
@@ -78,7 +78,7 @@ Więcej informacji na stronie http://utah-glx.sourceforge.net/.
 
 %package devel
 Summary:	Development files for Mesa (OpenGL compatible 3D lib)
-Summary(pl.UTF-8):   Pliki nagłówkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
+Summary(pl.UTF-8):	Pliki nagłówkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	OpenGL-devel
