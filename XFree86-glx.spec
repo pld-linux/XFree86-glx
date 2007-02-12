@@ -2,7 +2,7 @@
 %define glx_ver	latest
 
 Summary:	OpenGL 1.2 compatible 3D graphics library
-Summary(pl):	Biblioteka grafiki 3D kompatybilna z OpenGL 1.2
+Summary(pl.UTF-8):   Biblioteka grafiki 3D kompatybilna z OpenGL 1.2
 Name:		XFree86-glx
 Version:	4.2.0
 Release:	0.2
@@ -54,31 +54,31 @@ This package is based on Mesa %{mesaver} and utah-glx-%{glxver}.
 
 please see http://utah-glx.sourceforge.net/ for more information.
 
-%description -l pl
-To jest implementacja biblioteki Mesa 3D oraz GLX z obs³ug± sprzêtowej
-akceleracji. GLX zosta³ stworzony przez SGI jako rozszerzenie systemu
-X Window w celu integracji funkcji renderuj±cych OpenGL. Pozwala to
-bibliotece Mesa 3D na wykonywanie funkcji renderujacych 3D wewn±trz
+%description -l pl.UTF-8
+To jest implementacja biblioteki Mesa 3D oraz GLX z obsÅ‚ugÄ… sprzÄ™towej
+akceleracji. GLX zostaÅ‚ stworzony przez SGI jako rozszerzenie systemu
+X Window w celu integracji funkcji renderujÄ…cych OpenGL. Pozwala to
+bibliotece Mesa 3D na wykonywanie funkcji renderujacych 3D wewnÄ…trz
 procesu X serwera zamiast po stronie X klienta. Daje to potencjalne
-zyski wydajno¶ci, poniewa¿ wyrenderowany obraz nie musi byæ przesy³any
-z programu X klienta do X serwera (przesy³ane s± tylko polecenia
-potrzebne do renderowania). Daje to tak¿e mo¿liwo¶æ u¿ycia sprzêtowej
-akceleracji 3D. Ten pakiet zawiera sterowniki wykorzystuj±ce
-akceleracjê dla kart graficznych opartych na uk³adach z serii NVIDIA
+zyski wydajnoÅ›ci, poniewaÅ¼ wyrenderowany obraz nie musi byÄ‡ przesyÅ‚any
+z programu X klienta do X serwera (przesyÅ‚ane sÄ… tylko polecenia
+potrzebne do renderowania). Daje to takÅ¼e moÅ¼liwoÅ›Ä‡ uÅ¼ycia sprzÄ™towej
+akceleracji 3D. Ten pakiet zawiera sterowniki wykorzystujÄ…ce
+akceleracjÄ™ dla kart graficznych opartych na ukÅ‚adach z serii NVIDIA
 Riva i ATI Rage Pro.
 
-Biblioteka graficzna Mesa 3D jest potê¿nym i ogólnym zestawem narzêdzi
-do tworzenia grafiki komputerowej przy wsparciu sprzêtu. Mesa u¿ywa
-sk³adni poleceñ i maszyny stanów OpenGL za zgod± Silicon Graphics,
+Biblioteka graficzna Mesa 3D jest potÄ™Å¼nym i ogÃ³lnym zestawem narzÄ™dzi
+do tworzenia grafiki komputerowej przy wsparciu sprzÄ™tu. Mesa uÅ¼ywa
+skÅ‚adni poleceÅ„ i maszyny stanÃ³w OpenGL za zgodÄ… Silicon Graphics,
 Inc. Nie jest to jednak licencjonowana implementacja OpenGL.
 
 Ten pakiet bazuje na Mesie %{mesaver} oraz utah-glx-%{glxver}.
 
-Wiêcej informacji na stronie http://utah-glx.sourceforge.net/.
+WiÄ™cej informacji na stronie http://utah-glx.sourceforge.net/.
 
 %package devel
 Summary:	Development files for Mesa (OpenGL compatible 3D lib)
-Summary(pl):	Pliki nag³ówkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe dla Mesy (biblioteki 3D zgodnej z OpenGL)
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Provides:	OpenGL-devel
@@ -89,9 +89,9 @@ Obsoletes:	XFree86-OpenGL-devel
 Mesa is an OpenGL 1.2 compatible 3D graphics library. This package
 contains the header files needed to compile Mesa programs.
 
-%description devel -l pl
-Mesa jest bibliotek± 3D zgodn± z OpenGL 1.2. Ten pakiet zawiera pliki
-nag³ówkowe potrzebne do kompilowania programów u¿ywaj±cych Mesy.
+%description devel -l pl.UTF-8
+Mesa jest bibliotekÄ… 3D zgodnÄ… z OpenGL 1.2. Ten pakiet zawiera pliki
+nagÅ‚Ã³wkowe potrzebne do kompilowania programÃ³w uÅ¼ywajÄ…cych Mesy.
 
 %prep
 %setup -q -n Mesa-%{mesaversion} -b1 -a2
